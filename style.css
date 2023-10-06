@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   font-family: "ubuntu", sans-serif;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 }
 
 :root {
@@ -35,7 +35,7 @@ body {
 
 #playerTurn {
   display: grid;
-  width: 70%;
+  width: 545px;
   grid-template-columns: 1fr 1fr;
   text-align: center;
   align-items: center;
@@ -58,17 +58,23 @@ body {
 #gameBoard {
   display: grid;
   grid-template-areas: "button button button";
-  width: 70%;
+  width: 545px;
   height: 100%;
   gap: 10px;
   background-color: var(--border-color);
   
 }
 
+.boardOptions {
+  width: 175px;
+  height: 160px;
+  font-size: 60px;
+}
+
 
 #switchRestartTheme {
   display: grid;
-  width: 70%;
+  width: 545px;
   grid-template-columns: 1fr 1fr;
   text-align: center;
   align-items: center;
@@ -105,9 +111,3 @@ body {
 }
 /*podemos dividir cada botao com uma linha*/
 
-.playerClick {
-  font-size: 60px;
-
-  color: black;
-  
-}
