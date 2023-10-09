@@ -106,8 +106,11 @@ body {
   border: 1px solid black;
 }
 
-.currentPlayer {
+.winnwePlayer {
   background-color: var(--primary-color) !important;
 }
-/*podemos dividir cada botao com uma linha*/
 
+.diseble { 
+  pointer-events: none;
+  background-color: #fff;
+}
