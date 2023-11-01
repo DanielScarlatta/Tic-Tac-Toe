@@ -3,9 +3,10 @@ const matriz = [
   [],
   []
 ]
+
 let contPlayer = 'X'
-let winner = ''
 let varietWinner = ''
+const winnwer = true
 const buttonsSelect = document.querySelectorAll(".boardOptions")
 const  board = document.getElementById("gameBoard")
 const restartGame = document.getElementById("restartGame")
@@ -26,6 +27,7 @@ function startNamePlayer() {
 
 function checkerResult(varietWinner) {
   let lineWinner = []
+
   if (matriz[0][0] == varietWinner && matriz[0][1] == varietWinner && matriz[0][2] == varietWinner) {
     lineWinner = [optionBoard1, optionBoard2, optionBoard3]
     lineWinner.forEach(function(ele) {
@@ -90,8 +92,8 @@ function checkerResult(varietWinner) {
     })
     console.log("ganhou " + varietWinner)
     return true
-  }
-}
+}  }
+ 
 
 function disebleBoard() {
   buttonsSelect.forEach(function(ele){
@@ -101,6 +103,7 @@ function disebleBoard() {
 
 function buttonChecker() {
   buttonsSelect.forEach(function (ele) {
+
     ele.addEventListener("click", function () {
       const positionMatrizPrimary = ele.dataset.primary
       const positionMatrizSegundary = ele.dataset.segundary
@@ -123,12 +126,21 @@ function buttonChecker() {
           disebleBoard()
         }
       }
+      if(contPlayer == 'X'){
+        playerO.classList.remove("winnwePlayer")
+        playerX.classList.add("winnwePlayer")
+      } else if(contPlayer == 'O') {
+        playerX.classList.remove("winnwePlayer")
+        playerO.classList.add("winnwePlayer")
+      }
+      empate()
     })
   })
 }
 
 startNamePlayer()
 buttonChecker()
+
 
 restartGame.addEventListener('click', function() {
   window.location.reload()
