@@ -62,7 +62,6 @@ body {
   height: 100%;
   gap: 10px;
   background-color: var(--border-color);
-  
 }
 
 .boardOptions {
@@ -113,4 +112,5 @@ body {
 .diseble { 
   pointer-events: none;
   background-color: #fff;
+  border: 1px solid #fff;
 }
