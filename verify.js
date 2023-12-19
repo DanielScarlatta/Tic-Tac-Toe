@@ -6,63 +6,54 @@ const board = [
 ]
 
 // variaveis
+const buttonGameOption = document.querySelectorAll('.boardOptions')
 
-const playerX = window.prompt('Digite o nome do jogador X: ')
-const playerO = window.prompt('Digite o nome do jogador O: ')
-const gameBoard  = document.getElementById('gameBoard')
-const buttonInputClick = document.querySelectorAll('.boardOptions')
-const playerLblX = document.getElementById('playerX')
-const playerLblO = document.getElementById('playerO')
+const playerXName = window.prompt('Digite o nome do jogador X: ')
+const playerOName = window.prompt('Digite o nome do jogador O: ')
+const playerDisplayX = document.getElementById('playerX')
+const playerDisplayO = document.getElementById('playerO')
+let turnPlayer = 'X'
+let playerWinner = ''
+
 const restartGame = document.getElementById("restartGame")
 const switchTheme = document.getElementById("switchTheme")
-const winner = ''
-const conteiner = document.getElementById('conteiner')
 
-playerLblX.innerText = playerX + ' [X] '
-playerLblO.innerText = playerO + ' [O] '
+// adicionando o nome dos jogadores no display
+playerDisplayX.innerText = playerXName + ' [X] '
+playerDisplayO.innerText = playerOName + ' [O] '
 
-// Atribuindo valores
 
-let temp = ''
-let playerWinner = ''
-function playerCurrent() {
-  if(temp === '') {
-    temp = 'X'
-    playerLblO.classList.add('winnwePlayer')
-    playerLblX.classList.remove('winnwePlayer')
-    return temp
-  }
-  if(temp === 'X') {
-    temp = 'O'
-    playerWinner = playerO
-    playerLblX.classList.add('winnwePlayer')
-    playerLblO.classList.remove('winnwePlayer')
-    return temp
-  }
-  if(temp === 'O') {
-    temp = 'X'
-    playerWinner = playerX
-    playerLblO.classList.add('winnwePlayer')
-    playerLblX.classList.remove('winnwePlayer')
-    return temp
-  }
-}
-
-buttonInputClick.forEach((button) => {
-  button.addEventListener('click', ()=> {
-    const player = playerCurrent()
-    const primary = button.getAttribute('data-primary')
-    const segundary = button.getAttribute('data-segundary')
-
-    if(board[primary][segundary] == '') {
-      button.innerText = player
-      board[primary][segundary] = player
-    }
-
-  })
+buttonGameOption.forEach(function(button) {
+  button.addEventListener('click', clickPlayerCurrent)
+  
 })
 
-function checkWinner(player) {
+function clickPlayerCurrent(button) {
+  const buttonData = button.currentTarget.dataset.region
+  const region = buttonData.split('.')
+  const row = region[0]
+  const lin = region[1]
+
+  if(turnPlayer === 'X') {
+    button.currentTarget.innerText = turnPlayer
+    board[row][lin] = turnPlayer
+
+    button.currentTarget.removeEventListener('click', clickPlayerCurrent)
+    playerWinner = playerXName
+    checkWinPlayer(turnPlayer)
+    turnPlayer = 'O'
+  } else {
+    button.currentTarget.innerText = turnPlayer
+    board[row][lin] = turnPlayer
+    button.currentTarget.removeEventListener('click', clickPlayerCurrent)
+    checkWinPlayer(turnPlayer)
+    playerWinner = playerOName
+    turnPlayer = 'X'
+  }
+  
+}
+
+function checkWinPlayer(player) {
   // Verificações horizontais, verticais e diagonais
   const winConditions = [
     [[0, 0], [0, 1], [0, 2]],
@@ -79,18 +70,14 @@ function checkWinner(player) {
     condition.every(([row, col]) => board[row][col] === player)
   )) {
     console.log(`Ganhou ${player}`);
-    buttonInputClick.forEach((element) => {
+    buttonGameOption.forEach((element) => {
       element.classList.add('diseble')
     })
     alert(`O jogador ${playerWinner}, ganhou!`)
-  
-  }
+  } 
   return false;
 }
 
 restartGame.addEventListener('click', function() {
   window.location.reload()
 })
-
-
-
