@@ -56,7 +56,7 @@ function clickPlayerCurrent(button) {
     playerDisplayO.classList.remove('winnwePlayer')
     playerDisplayX.classList.add('winnwePlayer')
   }
-  
+  verifyaTie()
 }
 
 function addTextInBtn(button, row, col) {
@@ -111,6 +111,16 @@ function checkWinPlayer(player) {
 restartGame.addEventListener('click', function() {
   window.location.reload()
 })
+
+let contClick = 0
+function verifyaTie() {
+  contClick++
+
+  if(contClick === 9) {
+    alert('O jogo empatou!')
+    contClick = 0
+  }
+}
 
 
 const themeBody = document.getElementById('body')
